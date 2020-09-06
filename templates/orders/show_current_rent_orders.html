@@ -1,0 +1,55 @@
+{% extends 'home/layouts/base.html' %}
+{% block content %}
+{% if orders or due_orders %}
+    <div class="container">
+            <div class="row">
+                <div class="col-2">
+                </div>
+                <div class="col-8">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Reference Code</th>
+                            <th scope="col">Game Name</th>
+                            <th scope="col">Due Date</th>
+                            <th scope="col">Is Due</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {%for item in due_orders%}
+                            <tr style="color:white;background-color: red">
+                            <td>{{item.ref_code}}</td>
+                            <td>{{item.game.name}}</td>
+                            <td><strong>{{item.due_date}}</strong></td>
+                            <td>True</td>
+                            </tr>
+                            {% endfor %}
+                            {%for item in orders%}
+                            <tr>
+                            <td>{{item.ref_code}}</td>
+                            <td>{{item.game.name}}</td>
+                            <td>{{item.due_date}}</td>
+                            <td>False</td>
+                            </tr>
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
+                </ul>
+                </div>
+            </div>
+        </div>  
+{%else%}
+<div class="container">
+    <div class="row" style="margin-top:5%">
+      <div class="col-3">
+
+      </div>
+      <div class="col-9">
+        <h3>You Are Not Renting Any Games Currently</h3>
+        <button class='btn btn-warning' style="margin-top:2%;margin-left:22%"><a href="{% url 'home' %}" style="color:white">Browse Games</a></button>
+      </div>
+    </div>
+  </div>   
+{% endif %}         
+{% endblock %}

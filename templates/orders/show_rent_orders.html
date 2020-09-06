@@ -1,0 +1,47 @@
+{% extends 'home/layouts/base.html' %}
+{% block content %}
+{% if orders %}
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+
+            </div>
+            <div class="col-8">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Refernce Code</th>
+                        <th scope="col">Orded On</th>
+                        <th scope="col">Total Amount Paid</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {%for order in orders%}
+                        <tr>
+                        <td><a href="{% url 'show_rent_order' order.id %}">{{order.order_ref_code}}</a></td>
+                        <td>{{order.date}}</td>
+                        <td>₹{{order.total}}</td>
+                    </tr>
+                        {% endfor %}
+                
+                    </tbody>
+                </table>
+            </ul>
+            </div>
+        </div>
+    </div>    
+
+{% else %}
+            <div class="container">
+              <div class="row" style="margin-top:5%">
+                <div class="col-4">
+          
+                </div>
+                <div class="col-8">
+                  <h3>You Have No Rent Orders</h3>
+                  <button class='btn btn-warning' style="margin-top:2%;margin-left:7%"><a href="{% url 'home' %}" style="color:white">Browse Games</a></button>
+                </div>
+              </div>
+            </div>   
+{%endif%}       
+{% endblock %}

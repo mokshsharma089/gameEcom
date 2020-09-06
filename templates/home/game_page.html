@@ -1,0 +1,82 @@
+{% extends 'home/layouts/base.html' %}
+{% block content %}
+
+    <h1 style="margin-left:20%;margin-top:1%;width:60%;text-align:center">{{game.name}}</h1>
+    <div style="display:flex ; flex-flow:row wrap; justify-content:center">
+            <div style="width:27%;">
+                    <div class="card">
+                            <img src="{{game.image_url}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <div>
+                                    <h2 style="text-align: center"> <strong> Price</strong> ₹ {{game.price}}</h2>
+                                </div>  
+                                {%if request.user.is_authenticated %}  
+                                <a href="{% url 'AddToCart' game.id %}" class="btn btn-primary btn-block" >ADD TO CART</a>
+                                {% else %}
+                                <a href="{% url 'login' %}" class="btn btn-primary btn-block" >LOGIN</a>
+                                {% endif %}
+                            </div>
+                        </div>
+            </div>
+
+            <div style="margin-left:2%" >
+                    <iframe src="https://www.youtube.com/embed/{{game.trailer_id}}" frameborder="0" width="567" height="345" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+    </div>
+    {% if offers %}
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+
+            </div>
+            <div class="col-7">
+                <h3>Rent Offers</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+
+            </div>
+            <div class="col-8">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Rent Duration</th>
+                        <th scope="col">Price</th>
+                        <th scope="col"><span style="margin-left: 35%">Rent</span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {%for offer in offers%}
+                        <tr>
+                        <td>{{offer.time_period}} Weeks</a></td>
+                        <td>₹ {{offer.rent}}</td>
+                        {%if request.user.is_authenticated %}
+                        <td><button class="btn btn-block btn-primary"> <a href="{% url 'AddToRentCart' offer.id %}" style="color:white">Rent for {{offer.time_period}} Weeks</a></button></td>
+                        {%else%}
+                        <td><a href="{% url 'login' %}" class="btn btn-primary btn-block" >LOGIN</a></td>     
+                        {% endif %}
+                    </tr>
+                        {% endfor %}
+                
+                    </tbody>
+                </table>
+            </ul>
+            </div>
+        </div>
+    </div>  
+    {% else %}
+    <div class="container" style="margin-top:3%">
+        <div class="row">
+            <div class="col-4">
+
+            </div>
+            <div class="col-8">
+                    <h2>Sorry You Can't Rent This Game</h2>
+            </div>
+        </div>
+    </div>
+      
+    {% endif %}      
+            
+{% endblock %}

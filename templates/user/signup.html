@@ -1,0 +1,15 @@
+{% extends 'home/layouts/base.html' %}
+<div class="container">
+  <div class="row">
+
+    {% block content %}
+    <h2>Sign up</h2>
+    <form method="post" action="">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Sign up</button>
+    </form>
+    {% endblock %}
+  
+  </div>
+</div>

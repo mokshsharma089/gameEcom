@@ -1,0 +1,34 @@
+{% extends 'home/layouts/base.html' %}
+{% block content %}
+        <div class="container">
+                <div class="row">
+                    <div class="col-2">
+
+                    </div>
+                    <div class="col-8">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Reference Code</th>
+                                <th scope="col">Game Name</th>
+                                <th scope="col">Added To Cart On</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {%for item in order_items%}
+                                <tr>
+                                <td>{{item.ref_code}}</td>
+                                <td>{{item.game.name}}</td>
+                                <td>{{item.date_time}}</td>
+                                <td>₹{{item.amount}}</td>
+                            </tr>
+                                {% endfor %}
+                        
+                            </tbody>
+                        </table>
+                    </ul>
+                    </div>
+                </div>
+            </div>          
+{% endblock %}

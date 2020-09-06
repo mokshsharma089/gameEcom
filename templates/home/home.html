@@ -1,0 +1,10 @@
+{% extends 'home/layouts/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row " style="margin-left:4%">
+            {% for game in games %}
+                {% include 'home/components/game_card.html'%}
+            {% endfor %}
+    </div>
+</div>
+{% endblock %}

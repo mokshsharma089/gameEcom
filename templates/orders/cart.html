@@ -1,0 +1,62 @@
+{% extends 'home/layouts/base.html' %}
+{% block content %}
+{% if cart_items or rent_items %}
+  <div class="container">
+        <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-8">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Game Name</th>
+                        <th scope="col">Type Of Transaction</th>
+                        <th scope="col">duration</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Delete from cart</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {%for item in cart_items%}
+                        <tr>
+                        <td style="width:25%">{{item.game.name}}</td>
+                        <td style="width:20%">PURCHASE</td>
+                        <td style="width:20%">N/A</td>
+                        <td style="width:15%">₹{{item.amount}}</td>
+                        <td style="width:20%"><button class="btn btn-danger btn-block"><a href="{% url 'DeleteFromCart' item.id%}" style="color:white">Remove</a></button>  </td>
+                      </tr>
+                      {% endfor %}
+                      {%for item in rent_items%}
+                      <tr>
+                      <td style="width:25%">{{item.offer.game}}</td>
+                      <td style="width:20%">RENT</td>
+                      <td style="width:20%">{{item.duration}} weeks</td>
+                      <td style="width:15%">₹{{item.amount}}</td>
+                      <td style="width:20%"><button class="btn btn-danger btn-block"><a href="{% url 'DelFromRentCart' item.id %}" style="color:white">Remove</a></button>  </td>
+                    </tr>
+                      {% endfor %}
+                      <tr>
+                      <td></td>
+                      <td></td>
+                      <td><strong>Total Amount:-</strong></td>
+                      <td><strong>₹{{total}}</strong></td>
+                      <td><button class="btn btn-success btn-block"><a href="{% url 'checkout' %}" style="color:white">Purchase</a></button>  </td>
+                      </tr>
+          </div>
+        </div>
+  </div>
+
+{% else %}
+  <div class="container">
+    <div class="row" style="margin-top:5%">
+      <div class="col-4">
+
+      </div>
+      <div class="col-8">
+        <h3 style="margin-left:7%">Your Cart is Empty</h3>
+        <button class='btn btn-warning' style="margin-top:2%;margin-left:14%"><a href="{% url 'home' %}" style="color:white">Browse Games</a></button>
+      </div>
+    </div>
+  </div>   
+  {%endif%}   
+{% endblock %}

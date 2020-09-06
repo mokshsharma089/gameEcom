@@ -1,0 +1,9 @@
+<div class="card" style="width: 26%;margin-left:3.33%;margin-top:2%">
+    <img src="{{game.image_url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><a href="{% url 'get_game' game.id %}">{{game.name|capfirst}}</a></h5>
+          <div>
+            <p class="card-text">{{game.description}}</p>
+          </div>   
+        </div>
+      </div>
